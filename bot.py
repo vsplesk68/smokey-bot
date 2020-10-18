@@ -9,8 +9,6 @@ logging.basicConfig(
 
 updater = Updater(token=config.bot_token)
 
-register(updater.dispatcher)
-
 updater.start_polling(config.polling_interval)
 
 updater.idle()
