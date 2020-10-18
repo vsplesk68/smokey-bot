@@ -14,7 +14,7 @@ def get_details(lat, longt):
     r = requests.get(endpoint)
     result = r.json()
 
-    aqi_token = result['data']['aqi']
+    aqi = result['data']['aqi']
     city = result['data']['city']['name']
     url = result['data']['city']['url']
     pol = result['data']['dominentpol']
@@ -35,21 +35,21 @@ def get_details(lat, longt):
     classf = classify(aqi_token)
 
     message = "*{0}*\nAQI : {1} ({2})\nDominant Pollutant : {3}\nFor more info, click [here.]({4})\n_Source:_ {5}".format(
-        city, aqi_token, classf, pol.upper(), url, attrib_string)
+        city, aqi, classf, pol.upper(), url, attrib_string)
 
     return message, aqi, pol
 
 
 def classify(aqi):
-    if aqi_token < 51:
+    if aqi < 51:
         return "Good"
-    elif aqi_token < 101:
+    elif aqi < 101:
         return "Moderate"
-    elif aqi_token < 151:
+    elif aqi < 151:
         return "Unhealthy for Sensitive Groups"
-    elif aqi_token < 201:
+    elif aqi < 201:
         return "Unhealthy"
-    elif aqi_token < 301:
+    elif aqi < 301:
         return "Very Unhealthy"
     else:
         return "Hazardous"
